@@ -2,7 +2,7 @@ describe("Login", () => {
   it("logs in with self-healing selectors", () => {
     cy.visit("/login");
 
-    cy.smartGet("#username", { intent: "username input field" }).type("practice");
+    cy.smartGet(".name", { intent: "Find the username input field. It may have id username, name username, placeholder Username, or type text." }).type("practice");
     cy.smartGet("#password", { intent: "Password input field" }).type("SuperSecretPassword!");
 
     cy.smartGet("#login-btn", {
@@ -10,6 +10,6 @@ describe("Login", () => {
     }).click();
 
     cy.url().should("include", "/secure");
-    cy.get("#flash b").should("contain", "You logged into a secure area!");
+    cy.smartGet("#flash b", { intent: "Flash message container for login success" }).should("contain", "You logged into a secure area!");
   });
 });

@@ -1,4 +1,4 @@
-function compactDomSnapshot() {
+function compactDomSnapshot(doc) {
     const interactive = [
         "button",
         "a",
@@ -7,22 +7,25 @@ function compactDomSnapshot() {
         "select",
         "[role]",
         "[data-testid]",
-        "[aria-label]"
+        "[aria-label]",
+        "[name]",
+        "[placeholder]"
     ].join(",");
 
-    return Array.from(document.querySelectorAll(interactive))
-        .slice(0, 120)
+    return Array.from(doc.querySelectorAll(interactive))
+        .slice(0, 150)
         .map((el) => ({
             tag: el.tagName.toLowerCase(),
             id: el.id || null,
-            classes: el.className || null,
+            class: el.className || null,
             text: el.innerText?.trim().slice(0, 80) || null,
             ariaLabel: el.getAttribute("aria-label"),
             role: el.getAttribute("role"),
             name: el.getAttribute("name"),
             type: el.getAttribute("type"),
             dataTestId: el.getAttribute("data-testid"),
-            placeholder: el.getAttribute("placeholder")
+            placeholder: el.getAttribute("placeholder"),
+            value: el.getAttribute("value")
         }));
 }
 
@@ -60,70 +63,44 @@ Cypress.Commands.add("smartGet", (selector, options = {}) => {
 
 function attemptHealing(selector, intent, timeout) {
     return cy.document().then((doc) => {
-        const domSnapshot = compactDomSnapshot.call(doc);
+        const domSnapshot = compactDomSnapshot(doc);
 
         return cy
-            .task("readHealingCache")
-            .then((cache) => {
-                return cy.task("healSelector", {
-                    originalSelector: selector,
-                    intent,
-                    currentUrl: window.location.href,
-                    specName: Cypress.spec.name,
-                    selectorHistory: cache[selector]?.history || [],
-                    domSnapshot
-                });
+            .task("healSelector", {
+                originalSelector: selector,
+                intent,
+                domSnapshot
             })
             .then((result) => {
                 if (!result || !result.selector) {
                     throw new Error(`Could not heal selector: ${selector}`);
                 }
 
-                Cypress.log({
-                    name: "AI Heal",
-                    message: `${selector} -> ${result.selector} (${result.confidence})`
-                });
+                const suggestedSelector = result.selector.trim();
+
+                if (suggestedSelector === selector) {
+                    throw new Error(
+                        `AI returned the exact broken selector again: "${suggestedSelector}". Original selector was "${selector}".`
+                    );
+                }
 
                 return cy.get("body").then(($body) => {
-                    if (!$body.find(result.selector).length) {
+                    if (!$body.find(suggestedSelector).length) {
                         throw new Error(
-                            `AI suggested selector "${result.selector}", but it was not found. Reason: ${result.reason}`
+                            `AI suggested selector "${suggestedSelector}", but it was not found. Reason: ${result.reason}`
                         );
                     }
 
-                    const suggestedSelector = result.selector;
-
-                    if (
-                        suggestedSelector === selector ||
-                        suggestedSelector.includes(selector.replace("#", "")) ||
-                        suggestedSelector.includes(selector.replace(".", ""))
-                    ) {
-                        throw new Error(
-                            `AI returned the broken selector again: "${suggestedSelector}". Try rerunning, or improve the intent.`
-                        );
-                    }
-
-                    const screenshotName = `healing-${Date.now()}`;
-
-                    cy.screenshot(screenshotName, { capture: "viewport" });
-
-                    cy.task("logHealedSelector", {
-                        spec: Cypress.spec.name,
-                        url: window.location.href,
-                        originalSelector: selector,
-                        healedSelector: result.selector,
-                        screenshot: `cypress/screenshots/${Cypress.spec.name}/${screenshotName}.png`,
-                        reason: result.reason,
-                        confidence: result.confidence
-                    });
-
-                    return cy.task("saveHealedSelector", {
-                        originalSelector: selector,
-                        healedSelector: result.selector
-                    }).then(() => {
-                        return cy.get(result.selector, { timeout });
-                    });
+                    return cy
+                        .task("saveHealedSelector", {
+                            originalSelector: selector,
+                            healedSelector: suggestedSelector
+                        })
+                        .then(() => {
+                            return cy.get(suggestedSelector, { timeout });
+                        });
                 });
             });
     });
+
 }
