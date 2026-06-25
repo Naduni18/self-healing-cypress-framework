@@ -9,7 +9,8 @@ function compactDomSnapshot(doc) {
         "[data-testid]",
         "[aria-label]",
         "[name]",
-        "[placeholder]"
+        "[placeholder]",
+        "[href]"
     ].join(",");
 
     return Array.from(doc.querySelectorAll(interactive))
@@ -25,6 +26,7 @@ function compactDomSnapshot(doc) {
             type: el.getAttribute("type"),
             dataTestId: el.getAttribute("data-testid"),
             placeholder: el.getAttribute("placeholder"),
+            href: el.getAttribute("href"),
             value: el.getAttribute("value")
         }));
 }

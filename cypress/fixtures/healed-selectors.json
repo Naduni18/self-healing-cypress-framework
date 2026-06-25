@@ -1,18 +1,52 @@
 {
   "#login-btn": {
-    "current": "#submit-login",
+    "current": "button#submit-login[type='submit']",
     "history": [
       "#login-btn",
       "button[type='submit']",
       "form#login button#submit-login[type='submit']",
-      "#submit-login"
+      "#submit-login",
+      "button#submit-login[type='submit']",
+      "form#login button[type='submit']",
+      "button#submit-login",
+      "form#login button[type='submit']#submit-login",
+      "form#login button[type=\"submit\"]"
     ]
   },
   ".name": {
     "current": "#username",
     "history": [
       ".name",
-      "#username"
+      "#username",
+      "input#username"
+    ]
+  },
+  ".validationCustom01": {
+    "current": "#validationCustom01",
+    "history": [
+      ".validationCustom01",
+      "#validationCustom01"
+    ]
+  },
+  ".validationCustom05[type='tel']": {
+    "current": "input[name=\"contactnumber\"][type=\"tel\"]",
+    "history": [
+      ".validationCustom05[type='tel']",
+      "input[name=\"contactnumber\"][type=\"tel\"]"
+    ]
+  },
+  "#btn[type='submit']": {
+    "current": "button[type='submit']:contains('Register')",
+    "history": [
+      "#btn[type='submit']",
+      "button[type='submit']:contains('Register')"
+    ]
+  },
+  "#alert-info": {
+    "current": "div[role=\"alert\"].alert.alert-info",
+    "history": [
+      "#alert-info",
+      "div[role=\"alert\"].alert.alert-info"
     ]
   }
 }
