@@ -1,0 +1,41 @@
+[
+  {
+    "spec": "login.cy.js",
+    "url": "https://practice.expandtesting.com/__cypress/iframes/cypress%5Ce2e%5Clogin.cy.js?browserFamily=chromium",
+    "originalSelector": "#login-btn",
+    "healedSelector": "button[type='submit']",
+    "reason": "DOM snapshot is empty, so no element-specific attributes can be verified. A broadly stable selector for a primary login action is the form submit button, typically used for Login/Sign in submission.",
+    "confidence": 0.2,
+    "healedAt": "2026-06-25T11:32:36.797Z"
+  },
+  {
+    "spec": "login.cy.js",
+    "url": "https://practice.expandtesting.com/__cypress/iframes/cypress%5Ce2e%5Clogin.cy.js?browserFamily=chromium",
+    "originalSelector": "#login-btn",
+    "healedSelector": "button[type='submit']",
+    "screenshot": "cypress/screenshots/login.cy.js/healing-1782396796000.png",
+    "reason": "No DOM snapshot was provided, so an attribute-based selector that commonly targets the primary login submit control is the most stable fallback without relying on the broken id/class/text.",
+    "confidence": 0.28,
+    "healedAt": "2026-06-25T14:13:16.799Z"
+  },
+  {
+    "spec": "login.cy.js",
+    "url": "https://practice.expandtesting.com/__cypress/iframes/cypress%5Ce2e%5Clogin.cy.js?browserFamily=chromium",
+    "originalSelector": "#login-btn",
+    "healedSelector": "button[type='submit']",
+    "screenshot": "cypress/screenshots/login.cy.js/healing-1782396854046.png",
+    "reason": "DOM snapshot is empty, so no reliable attribute-based match is possible. A generic submit-button selector best matches the intent of the primary login form submission control without relying on the broken id.",
+    "confidence": 0.22,
+    "healedAt": "2026-06-25T14:14:14.762Z"
+  },
+  {
+    "spec": "login.cy.js",
+    "url": "https://practice.expandtesting.com/__cypress/iframes/cypress%5Ce2e%5Clogin.cy.js?browserFamily=chromium",
+    "originalSelector": "#login-btn",
+    "healedSelector": "button[type='submit']",
+    "screenshot": "cypress/screenshots/login.cy.js/healing-1782397188280.png",
+    "reason": "DOM snapshot is empty, so no attributes/text can be verified. A stable, intent-based fallback for the primary login action is the form submit button.",
+    "confidence": 0.22,
+    "healedAt": "2026-06-25T14:19:49.035Z"
+  }
+]
