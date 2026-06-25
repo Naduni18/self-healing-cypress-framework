@@ -82,6 +82,7 @@ node_modules/
 .env
 cypress/videos/
 cypress/screenshots/
+....
 ```
 
 ## Cypress Configuration
