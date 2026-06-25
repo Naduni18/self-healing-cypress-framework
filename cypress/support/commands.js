@@ -92,7 +92,19 @@ function attemptHealing(selector, intent, timeout) {
                             `AI suggested selector "${suggestedSelector}", but it was not found. Reason: ${result.reason}`
                         );
                     }
+                    const screenshotName = `healing-${Date.now()}`;
 
+                    cy.screenshot(screenshotName, { capture: "viewport" });
+
+                    cy.task("logHealedSelector", {
+                        spec: Cypress.spec.name,
+                        url: window.location.href,
+                        originalSelector: selector,
+                        healedSelector: result.selector,
+                        screenshot: `cypress/screenshots/${Cypress.spec.name}/${screenshotName}.png`,
+                        reason: result.reason,
+                        confidence: result.confidence
+                    });
                     return cy
                         .task("saveHealedSelector", {
                             originalSelector: selector,

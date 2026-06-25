@@ -37,5 +37,65 @@
     "reason": "DOM snapshot is empty, so no attributes/text can be verified. A stable, intent-based fallback for the primary login action is the form submit button.",
     "confidence": 0.22,
     "healedAt": "2026-06-25T14:19:49.035Z"
+  },
+  {
+    "spec": "examplepage.cy.js",
+    "url": "https://practice.expandtesting.com/__cypress/iframes/cypress%5Ce2e%5Cexamplepage.cy.js?browserFamily=chromium",
+    "originalSelector": ".name",
+    "healedSelector": "#username",
+    "screenshot": "cypress/screenshots/examplepage.cy.js/healing-1782407152479.png",
+    "reason": "The DOM contains a visible username input with stable id=\"username\" (also name=\"username\" and type=\"text\"), matching the intended username field more reliably than the broken .name class selector.",
+    "confidence": 0.97,
+    "healedAt": "2026-06-25T17:05:53.275Z"
+  },
+  {
+    "spec": "examplepage.cy.js",
+    "url": "https://practice.expandtesting.com/__cypress/iframes/cypress%5Ce2e%5Cexamplepage.cy.js?browserFamily=chromium",
+    "originalSelector": "#login-btn",
+    "healedSelector": "form#login button[type='submit']",
+    "screenshot": "cypress/screenshots/examplepage.cy.js/healing-1782407157965.png",
+    "reason": "Targets the submit button within the login form, matching the primary action without relying on the broken #login-btn id. The DOM shows a login form with id 'login' containing a submit button (id 'submit-login', text 'Login').",
+    "confidence": 0.9,
+    "healedAt": "2026-06-25T17:05:58.703Z"
+  },
+  {
+    "spec": "examplepage.cy.js",
+    "url": "https://practice.expandtesting.com/__cypress/iframes/cypress%5Ce2e%5Cexamplepage.cy.js?browserFamily=chromium",
+    "originalSelector": ".validationCustom01",
+    "healedSelector": "#validationCustom01",
+    "screenshot": "cypress/screenshots/examplepage.cy.js/healing-1782407167513.png",
+    "reason": "The DOM contains an input for the first name/contact name with a stable unique id=\"validationCustom01\" (the original class selector does not exist).",
+    "confidence": 0.93,
+    "healedAt": "2026-06-25T17:06:08.365Z"
+  },
+  {
+    "spec": "examplepage.cy.js",
+    "url": "https://practice.expandtesting.com/__cypress/iframes/cypress%5Ce2e%5Cexamplepage.cy.js?browserFamily=chromium",
+    "originalSelector": ".validationCustom05[type='tel']",
+    "healedSelector": "input[name=\"contactnumber\"][type=\"tel\"][placeholder=\"012-3456789\"]",
+    "screenshot": "cypress/screenshots/examplepage.cy.js/healing-1782407171508.png",
+    "reason": "Targets the telephone input using stable attributes present in the DOM (name, type, and placeholder) and avoids the non-unique id used by multiple inputs.",
+    "confidence": 0.86,
+    "healedAt": "2026-06-25T17:06:12.244Z"
+  },
+  {
+    "spec": "examplepage.cy.js",
+    "url": "https://practice.expandtesting.com/__cypress/iframes/cypress%5Ce2e%5Cexamplepage.cy.js?browserFamily=chromium",
+    "originalSelector": "#btn[type='submit']",
+    "healedSelector": "button[type='submit']:contains('Register')",
+    "screenshot": "cypress/screenshots/examplepage.cy.js/healing-1782407176094.png",
+    "reason": "The DOM snapshot contains a visible submit button with text 'Register' and type='submit'. Targeting it by type and exact button text is more stable than the missing #btn id.",
+    "confidence": 0.78,
+    "healedAt": "2026-06-25T17:06:16.824Z"
+  },
+  {
+    "spec": "examplepage.cy.js",
+    "url": "https://practice.expandtesting.com/__cypress/iframes/cypress%5Ce2e%5Cexamplepage.cy.js?browserFamily=chromium",
+    "originalSelector": "#alert-info",
+    "healedSelector": "[role=\"alert\"].alert.alert-info",
+    "screenshot": "cypress/screenshots/examplepage.cy.js/healing-1782407182700.png",
+    "reason": "The intended success message is a visible Bootstrap info alert with role=\"alert\" and classes \"alert alert-info\"; the original id does not exist in the DOM snapshot.",
+    "confidence": 0.86,
+    "healedAt": "2026-06-25T17:06:23.432Z"
   }
 ]

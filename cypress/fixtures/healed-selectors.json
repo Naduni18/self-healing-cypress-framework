@@ -1,6 +1,6 @@
 {
   "#login-btn": {
-    "current": "button#submit-login[type='submit']",
+    "current": "form#login button[type='submit']",
     "history": [
       "#login-btn",
       "button[type='submit']",
@@ -29,10 +29,11 @@
     ]
   },
   ".validationCustom05[type='tel']": {
-    "current": "input[name=\"contactnumber\"][type=\"tel\"]",
+    "current": "input[name=\"contactnumber\"][type=\"tel\"][placeholder=\"012-3456789\"]",
     "history": [
       ".validationCustom05[type='tel']",
-      "input[name=\"contactnumber\"][type=\"tel\"]"
+      "input[name=\"contactnumber\"][type=\"tel\"]",
+      "input[name=\"contactnumber\"][type=\"tel\"][placeholder=\"012-3456789\"]"
     ]
   },
   "#btn[type='submit']": {
@@ -43,10 +44,11 @@
     ]
   },
   "#alert-info": {
-    "current": "div[role=\"alert\"].alert.alert-info",
+    "current": "[role=\"alert\"].alert.alert-info",
     "history": [
       "#alert-info",
-      "div[role=\"alert\"].alert.alert-info"
+      "div[role=\"alert\"].alert.alert-info",
+      "[role=\"alert\"].alert.alert-info"
     ]
   }
 }
